@@ -1,0 +1,143 @@
+﻿<style>
+    .navbar-nav {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .nav-item {
+        margin-bottom: 5px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        border-radius: 8px;
+        transition: background 0.3s, transform 0.2s;
+        font-size: 18px;
+        font-weight: 500;
+        color: #343a40;
+    }
+
+        .nav-link:hover {
+            background-color: #007bff;
+            color: black;
+            transform: scale(1.05);
+        }
+
+    .nav-icon {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    .menu-title {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px 0;
+        text-transform: uppercase;
+        color: #495057;
+    }
+
+    .sub-navbar-nav {
+        padding-left: 20px;
+    }
+
+    .sub-nav-link {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        transition: background 0.3s, transform 0.2s;
+        border-radius: 5px;
+    }
+
+        .sub-nav-link:hover {
+            background-color: #007bff;
+            color: black;
+            transform: scale(1.05);
+        }
+</style>
+
+<ul class="navbar-nav">
+    <li class="menu-title">📌 Ana Menü</li>
+
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+            <span class="nav-icon">🏠</span> Dashboard
+        </a>
+    </li>
+
+    <!-- Müşteriler -->
+    <li class="nav-item">
+        <a class="nav-link menu-arrow" href="#sidebarCustomers" data-bs-toggle="collapse" role="button">
+            <span class="nav-icon">👥</span> Müşteriler
+        </a>
+        <div class="collapse" id="sidebarCustomers">
+            <ul class="nav sub-navbar-nav">
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Customer" asp-action="List">📄 Müşteri Listesi</a></li>
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Customer" asp-action="Create">➕ Yeni Müşteri Ekle</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Kiralamalar -->
+    <li class="nav-item">
+        <a class="nav-link menu-arrow" href="#sidebarRentals" data-bs-toggle="collapse" role="button">
+            <span class="nav-icon">📅</span> Kiralamalar
+        </a>
+        <div class="collapse" id="sidebarRentals">
+            <ul class="nav sub-navbar-nav">
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Index">📜 Kiralama Listesi</a></li>
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Rental" asp-action="Create">🚀 Yeni Kiralama Başlat</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Depo Stok -->
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Admin" asp-controller="Stock" asp-action="Index">
+            <span class="nav-icon">📦</span> Depo Stok
+        </a>
+    </li>
+
+    <!-- Ürünler -->
+    <li class="nav-item">
+        <a class="nav-link menu-arrow" href="#sidebarProducts" data-bs-toggle="collapse" role="button">
+            <span class="nav-icon">🛍️</span> Ürünler
+        </a>
+        <div class="collapse" id="sidebarProducts">
+            <ul class="nav sub-navbar-nav">
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Product" asp-action="GetAllProducts">📋 Ürün Listesi</a></li>
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Product" asp-action="AddProduct">➕ Yeni Ürün</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Depo Cari -->
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Admin" asp-controller="DepoCari" asp-action="Index">
+            <span class="nav-icon">💰</span> Depo Cari
+        </a>
+    </li>
+
+    <!-- Çalışanlar -->
+    <li class="nav-item">
+        <a class="nav-link menu-arrow" href="#sidebarEmployees" data-bs-toggle="collapse" role="button">
+            <span class="nav-icon">👔</span> Çalışanlar
+        </a>
+        <div class="collapse" id="sidebarEmployees">
+            <ul class="nav sub-navbar-nav">
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Employee" asp-action="List">📄 Çalışan Listesi</a></li>
+                <li><a class="sub-nav-link" asp-area="Admin" asp-controller="Employee" asp-action="Create">➕ Yeni Çalışan</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Ayarlar -->
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Admin" asp-controller="Settings" asp-action="Index">
+            <span class="nav-icon">⚙️</span> Ayarlar
+        </a>
+    </li>
+</ul>

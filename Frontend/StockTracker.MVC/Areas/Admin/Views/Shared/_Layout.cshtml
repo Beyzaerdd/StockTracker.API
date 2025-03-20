@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from techzaa.in/larkon/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Feb 2025 19:31:49 GMT -->
+<head>
+    <!-- Title Meta -->
+    <meta charset="utf-8" />
+    <title>Dashboard | Larkon - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully responsive premium admin dashboard template" />
+    <meta name="author" content="Techzaa" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Admin/larkon/admin/assets/images/favicon.ico">
+
+    <!-- Vendor css (Require in all Page) -->
+    <link href="~/Admin/larkon/admin/assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <!-- Icons css (Require in all Page) -->
+    <link href="~/Admin/larkon/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css (Require in all Page) -->
+    <link href="~/Admin/larkon/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config js (Require in all Page) -->
+    <script src="~/Admin/larkon/admin/assets/js/config.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+    <header class="topbar">
+        <partial name="_topbar" />
+        </header>
+  
+    <div class="main-nav">
+        <partial name="_Navbar" />
+        </div>
+
+        <div class="page-content">
+
+        @RenderBody()
+      </div>
+        </div>
+  
+
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+ 
+
+    <!-- Bildirimler (NToastNotify) -->
+    @await Component.InvokeAsync("NToastNotify")
+    <!-- Önce jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  
+    <!-- Vendor Javascript (Require in all Page) -->
+    <script src="~/Admin/larkon/admin/assets/js/vendor.js"></script>
+
+    <!-- App Javascript (Require in all Page) -->
+    <script src="~/Admin/larkon/admin/assets/js/app.js"></script>
+    <script src="~/Admin/larkon/admin/assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    @RenderSection("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            var errorMessage = '@ViewBag.ErrorMessage';
+            if (errorMessage) {
+                toastr.error(errorMessage);
+            }
+        });
+        $(document).ready(function () {
+            var successMessage = '@ViewBag.SuccessMessage';
+            if (successMessage) {
+                toastr.success(successMessage);
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>
