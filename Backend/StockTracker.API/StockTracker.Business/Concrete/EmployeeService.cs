@@ -71,7 +71,7 @@ namespace StockTracker.Business.Concrete
 
         public async Task<ResponseDTO<EmployeeDTO>> GetEmployeeByIdAsync(int id)
         {
-            var employee = _employee.GetByIdAsync(id);
+            var employee = await _employee.GetByIdAsync(id);
             if (employee != null)
             {
                 var employeeDTO = _mapper.Map<EmployeeDTO>(employee);

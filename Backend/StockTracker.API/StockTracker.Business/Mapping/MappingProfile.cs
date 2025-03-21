@@ -94,8 +94,9 @@ namespace StockTracker.Business.Mapping
 
             // Employee Mapping
             CreateMap<Employee, EmployeeDTO>().ReverseMap();
-            CreateMap<CreateEmployeeDTO, Employee>();
-         
+            CreateMap<CreateEmployeeDTO, Employee>().ReverseMap();
+            CreateMap<UpdateEmployeeDTO, Employee>().ReverseMap();
+
 
 
 
