@@ -1,0 +1,85 @@
+﻿@model IEnumerable<StockTracker.MVC.Areas.Admin.Models.CustomerModels.CustomerModel>
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center gap-1">
+                    <h4 class="card-title flex-grow-1">Müşteriler</h4>
+
+                    <a href="@Url.Action("Create", "Customer", new { area = "Admin" })" class="btn btn-sm btn-primary">
+                        Yeni Müşteri Oluştur
+                    </a>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0 table-hover table-centered">
+                            <thead class="bg-light-subtle">
+                                <tr>
+                                    <th style="width: 20px;">
+                                        <div class="form-check ms-1">
+                                            <input type="checkbox" class="form-check-input" id="customCheck1">
+                                            <label class="form-check-label" for="customCheck1"></label>
+                                        </div>
+                                    </th>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                    <th>Email</th>
+                                    <th>Telefon</th>
+                                    <th>Adres</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var customer in Model) // CustomerModel verisiyle her bir müşteri için satır oluşturulacak
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check ms-1">
+                                                <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>@customer.Name</td>
+                                        <td>@customer.LastName</td>
+                                        <td>@customer.Email</td>
+                                        <td>@customer.Phone</td>
+                                        <td>@customer.Address</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="@Url.Action("Details", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon> Detay</a>
+                                                <a href="@Url.Action("Edit", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon> Düzenle</a>
+                                                <a href="@Url.Action("Delete", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon> Sil</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer border-top">
+                    <nav aria-label="Sayfalama">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Önceki</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Sonraki</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
