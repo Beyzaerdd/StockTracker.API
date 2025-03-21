@@ -44,5 +44,14 @@ namespace StockTracker.API.Controllers
             var response = await _employeeService.UpdateEmployeeAsync(updateEmployeeDTO);
             return CreateResponse(response);
         }
+
+        [HttpDelete("deleteEmployee/{id}")]
+
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var response = await _employeeService.DeleteEmployeeAsync(id);
+            return CreateResponse(response);
+        }
+
     }
 }
