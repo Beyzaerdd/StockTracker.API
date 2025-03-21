@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Backend/StockTracker.API/StockTracker.API/appsettings.json
+/Backend/StockTracker.API/StockTracker.API/Program.cs
+/Backend/StockTracker.API/StockTracker.Data/Concrete/Context/StockTrackerDbContext.cs
+/Frontend/StockTracker.MVC/Program.cs
