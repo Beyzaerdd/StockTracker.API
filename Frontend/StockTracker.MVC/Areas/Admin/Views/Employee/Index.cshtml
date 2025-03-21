@@ -1,0 +1,138 @@
+﻿@model IEnumerable<StockTracker.MVC.Areas.Admin.Models.EmployeeModels.EmployeeModel>
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center gap-1">
+                    <h4 class="card-title flex-grow-1">Çalışanlar</h4>
+
+                    <a href="@Url.Action("Create", "Employee", new { area = "Admin" })" class="btn btn-sm btn-primary">
+                        Yeni Çalışan Oluştur
+                    </a>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0 table-hover table-centered">
+                            <thead class="bg-light-subtle">
+                                <tr>
+                                    <th style="width: 20px;">
+                                        <div class="form-check ms-1">
+                                            <input type="checkbox" class="form-check-input" id="customCheck1">
+                                            <label class="form-check-label" for="customCheck1"></label>
+                                        </div>
+                                    </th>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                    <th>Telefon</th>
+                                    <th>Pozisyon</th>
+                                    <th>İşe giriş tarihi</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var employee in Model) // EmployeeModel verisiyle her bir çalışan için satır oluşturulacak
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check ms-1">
+                                                <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>@employee.Name</td>
+                                        <td>@employee.LastName</td>
+                           
+                                        <td>@employee.Phone</td>
+                       
+                                        <td>@employee.Position</td>
+                                        <td>@employee.StartDate</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="@Url.Action("Details", "Employee", new { id = employee.Id, area = "Admin" })" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon> Detay</a>
+                                                <a href="@Url.Action("Edit", "Employee", new { id = employee.Id, area = "Admin" })" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon> Düzenle</a>
+                                                <a href="javascript:void(0);" class="btn btn-soft-danger btn-sm" onclick="confirmDelete(@employee.Id)">
+                                                    <iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon> Sil
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer border-top">
+                    <nav aria-label="Sayfalama">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Önceki</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Sonraki</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(employeeId) {
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: "Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, sil!',
+            cancelButtonText: 'Hayır, iptal et'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // AJAX isteği gönderiliyor
+                $.ajax({
+                    url: '@Url.Action("Delete", "Employee", new { area = "Admin" })',
+                    type: 'POST',
+                    data: { id: employeeId },  // Silinecek employeeId
+                    success: function (response) {
+                        if (response.success) {  // Sunucudan gelen başarı durumunu kontrol et
+                            Swal.fire(
+                                'Başarılı!',
+                                'Çalışan başarıyla silindi.',
+                                'success'
+                            );
+                            // İstenirse sayfa yenileyebilirsiniz
+                            // window.location.reload();
+                        } else {
+                            Swal.fire(
+                                'Hata!',
+                                'Çalışan silinirken bir hata oluştu.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Hata!',
+                            'Silme işlemi sırasında bir hata oluştu.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+</script>
+

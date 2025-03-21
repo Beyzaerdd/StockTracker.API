@@ -1,0 +1,161 @@
+﻿<!-- UpdateEmployee.cshtml -->
+@model StockTracker.MVC.Areas.Admin.Models.EmployeeModels.UpdateEmployeeModel
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <script type="text/javascript">
+        toastr.success('@TempData["SuccessMessage"]');
+    </script>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <script type="text/javascript">
+        toastr.error('@TempData["ErrorMessage"]');
+    </script>
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <!-- Card with shadow, rounded edges, and modern design -->
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header text-center btn-blue text-white">
+                    <h4><i class="bi bi-person-edit"></i> Çalışan Düzenle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- ID (Hidden) -->
+                        <div class="mb-4">
+                            <input asp-for="Id" type="hidden" />
+                        </div>
+
+                        <!-- Name Field -->
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fs-5">Ad</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg shadow-none", placeholder = "Adınızı girin", @autocomplete = "off" })
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <!-- Last Name Field -->
+                        <div class="mb-4">
+                            <label asp-for="LastName" class="form-label fs-5">Soyad</label>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control form-control-lg shadow-none", placeholder = "Soyadınızı girin", @autocomplete = "off" })
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Phone Field -->
+                        <div class="mb-4">
+                            <label asp-for="Phone" class="form-label fs-5">Telefon</label>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control form-control-lg shadow-none", placeholder = "Telefon numaranızı girin", @autocomplete = "off" })
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <!-- Position Field -->
+                        <div class="mb-4">
+                            <label asp-for="Position" class="form-label fs-5">Pozisyon</label>
+                            @Html.TextBoxFor(m => m.Position, new { @class = "form-control form-control-lg shadow-none", placeholder = "Pozisyonunuzu girin", @autocomplete = "off" })
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+
+                        <!-- Salary Field -->
+                        <div class="mb-4">
+                            <label asp-for="Salary" class="form-label fs-5">Maaş</label>
+                            @Html.TextBoxFor(m => m.Salary, new { @class = "form-control form-control-lg shadow-none", placeholder = "Maaşınızı girin", @autocomplete = "off" })
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+
+                        <!-- Start Date Field -->
+                        <div class="mb-4">
+                            <label asp-for="StartDate" class="form-label fs-5">Başlangıç Tarihi</label>
+                            @Html.EditorFor(m => m.StartDate, new { @class = "form-control form-control-lg shadow-none" })
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+                        <!-- End Date Field -->
+                        <div class="mb-4">
+                            <label asp-for="EndDate" class="form-label fs-5">Bitiş Tarihi (Opsiyonel)</label>
+                            @Html.EditorFor(m => m.EndDate, new { @class = "form-control form-control-lg shadow-none" })
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-lg w-48">Güncelle</button>
+                            <a href="@Url.Action("Index", "Employee", new { area = "Admin" })" class="btn btn-secondary btn-lg w-48">Geri Dön</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Customize the form controls */
+    .form-control-lg {
+        height: 50px;
+        font-size: 1.1rem;
+        padding-left: 15px;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #4e555b;
+        }
+
+    .card-header {
+        background-color: wheat;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        padding: 20px;
+    }
+
+    .card-body {
+        padding: 3rem;
+        background-color: #f8f9fa;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+        .card-body .form-label {
+            font-weight: 500;
+        }
+
+    .shadow-none {
+        box-shadow: none !important;
+    }
+
+    .bi {
+        font-size: 2.5rem;
+    }
+
+    /* Button width for a balanced layout */
+    .w-48 {
+        width: 48%;
+    }
+</style>

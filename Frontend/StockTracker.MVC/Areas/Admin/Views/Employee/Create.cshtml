@@ -1,0 +1,88 @@
+﻿@model StockTracker.MVC.Areas.Admin.Models.EmployeeModels.CreateEmployeeModel
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script type="text/javascript">
+        toastr.success('@TempData["SuccessMessage"]');
+    </script>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <script type="text/javascript">
+        toastr.error('@TempData["ErrorMessage"]');
+    </script>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-8 offset-xl-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Yeni Çalışan Ekle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" asp-controller="Employee">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label">İsim</label>
+                            <input asp-for="Name" class="form-control" placeholder="Çalışanın adını girin" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="LastName" class="form-label">Soyisim</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Çalışanın soyadını girin" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Phone" class="form-label">Telefon</label>
+                            <input asp-for="Phone" class="form-control" placeholder="Telefon numarasını girin" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Position" class="form-label">Pozisyon</label>
+                            <input asp-for="Position" class="form-control" placeholder="Çalışanın pozisyonunu girin" />
+                            <span asp-validation-for="Position" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Salary" class="form-label">Maaş</label>
+                            <input asp-for="Salary" type="number" class="form-control" placeholder="Çalışanın maaşını girin" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="StartDate" class="form-label">Başlangıç Tarihi</label>
+                            <input asp-for="StartDate" type="date" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="EndDate" class="form-label">Bitiş Tarihi</label>
+                            <input asp-for="EndDate" type="date" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                            <a href="@Url.Action("Index", "Employee", new { area = "Admin" })" class="btn btn-secondary">Geri</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
