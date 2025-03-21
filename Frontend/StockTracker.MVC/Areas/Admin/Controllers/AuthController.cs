@@ -31,7 +31,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
         }
 
 
-        [HttpPost("LoginUser")]
+        [HttpPost]
         public async Task<IActionResult> LoginUser(LoginUserModel loginUserModel, string returnUrl = null)
         {
             if (!ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             {
                 var response = await _authService.LoginUserAsync(loginUserModel);
 
-                if (response.IsSucceeded && response.Data?.AccessToken != null)
+                if (response.success && response.Data?.AccessToken != null)
                 {
                     var handler = new JwtSecurityTokenHandler();
                     var token = handler.ReadJwtToken(response.Data.AccessToken);
@@ -79,8 +79,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
                         {
                             return Redirect(returnUrl);
                         }
-
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        return Redirect("/Admin/Home/Index");
                     }
                 }
 

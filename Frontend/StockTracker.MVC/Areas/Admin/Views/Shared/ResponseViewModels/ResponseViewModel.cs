@@ -12,7 +12,7 @@ namespace ECommerce.MVC.Areas.Admin.Views.Shared.ResponseViewModels
         public List<string>? Errors { get; set; }
 
         [JsonPropertyName("success")]
-        public bool IsSucceeded { get; set; }
+        public bool success { get; set; }
         [JsonPropertyName("statusCode")]
         public int StatusCode { get; set; }
 
@@ -22,7 +22,7 @@ namespace ECommerce.MVC.Areas.Admin.Views.Shared.ResponseViewModels
             {
                 Data = data,
                 StatusCode = statusCode,
-                IsSucceeded = true
+                success = true
             };
         }
 
@@ -33,7 +33,7 @@ namespace ECommerce.MVC.Areas.Admin.Views.Shared.ResponseViewModels
             {
                 Data = default(T),
                 StatusCode = statusCode,
-                IsSucceeded = true
+                success = true
             };
         }
 
@@ -44,7 +44,7 @@ namespace ECommerce.MVC.Areas.Admin.Views.Shared.ResponseViewModels
             {
                 Errors = new List<string> { error },
                 StatusCode = statusCode,
-                IsSucceeded = false
+                success = false
             };
         }
 
@@ -55,7 +55,7 @@ namespace ECommerce.MVC.Areas.Admin.Views.Shared.ResponseViewModels
             {
                 Errors = errors,
                 StatusCode = statusCode,
-                IsSucceeded = false
+                success = false
             };
         }
     }

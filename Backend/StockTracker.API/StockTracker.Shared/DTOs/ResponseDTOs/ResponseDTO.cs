@@ -9,13 +9,15 @@ namespace StockTracker.Shared.DTOs.ResponseDTOs
 {
     public class ResponseDTO<T>
     {
+        [JsonPropertyName("data")]
         public T? Data { get; set; }
+        [JsonPropertyName("errors")]
         public List<string>? Errors { get; set; }
 
-        [JsonIgnore]
-        public bool IsSucceded { get; set; }
+        [JsonPropertyName("success")]
+        public bool IsSucceeded { get; set; }
 
-        [JsonIgnore]
+        [JsonPropertyName("statusCode")]
         public int StatusCode { get; set; }
 
 
@@ -26,7 +28,7 @@ namespace StockTracker.Shared.DTOs.ResponseDTOs
             {
                 Data = data,
                 StatusCode = statusCode,
-                IsSucceded = true
+                IsSucceeded = true
             };
         }
 
@@ -37,7 +39,7 @@ namespace StockTracker.Shared.DTOs.ResponseDTOs
             {
                 Data = default(T),
                 StatusCode = statusCode,
-                IsSucceded = true
+                IsSucceeded = true
             };
         }
 
@@ -48,7 +50,7 @@ namespace StockTracker.Shared.DTOs.ResponseDTOs
             {
                 Errors = new List<string> { error },
                 StatusCode = statusCode,
-                IsSucceded = false
+                IsSucceeded = false
             };
         }
 
@@ -59,7 +61,7 @@ namespace StockTracker.Shared.DTOs.ResponseDTOs
             {
                 Errors = errors,
                 StatusCode = statusCode,
-                IsSucceded = false
+                IsSucceeded = false
             };
         }
     }
