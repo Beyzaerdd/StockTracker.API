@@ -111,43 +111,43 @@ namespace StockTracker.Business.Concrete
 
             foreach (var product in products)
             {
-                // 1. Mevcut stok miktarı ve quantity
+                
                 int stockQuantity = product.StockQuantity;
                 int productQuantity = product.Quantity;
 
-                // 2. Kiralanmış ürünlerin miktarını hesaplayalım
+        
                 var rentedItems = await _rentalRepository
                     .GetAllAsync(ri => ri.ProductId == product.Id && ri.Rental.EndDate >= DateTime.Now);
 
-                // Debugging: rentedItems kontrolü
+              
                 Console.WriteLine($"Product: {product.Name}, Rented Items Count: {rentedItems.Count()}");
 
-                int rentedQuantity = rentedItems.Sum(ri => ri?.Quantity ?? 0); // Kiralanan toplam miktar
+                int rentedQuantity = rentedItems.Sum(ri => ri?.Quantity ?? 0); // 
                 Console.WriteLine($"Product: {product.Name}, Rented Quantity: {rentedQuantity}");
 
-                // 3. Kalan ürünlerin miktarını hesaplayalım
+           
                 var remainingProducts = await _remainingProductRepository
                     .GetAllAsync(rp => rp.RentalItem.ProductId == product.Id && rp.DaysRemaining > 0);
 
-                // Debugging: remainingProducts kontrolü
+          
                 Console.WriteLine($"Product: {product.Name}, Remaining Products Count: {remainingProducts.Count()}");
 
-                int remainingQuantity = remainingProducts.Sum(rp => rp?.RentalItem?.Quantity ?? 0); // Geri alınmamış ürünler
+                int remainingQuantity = remainingProducts.Sum(rp => rp?.RentalItem?.Quantity ?? 0);
                 Console.WriteLine($"Product: {product.Name}, Remaining Quantity: {remainingQuantity}");
 
-                // 4. Bilgileri DTO'ya ekleyelim
+   
                 productStockInfoList.Add(new ProductStockInfoDTO
                 {
                     ProductId = product.Id,
                     ProductName = product.Name,
-                    StockQuantity = stockQuantity,  // Mevcut stok
-                    RentedQuantity = rentedQuantity,  // Kiralanan miktar
-                    RemainingQuantity = remainingQuantity,  // Geri alınmayan ürün miktarı
-                    Quantity = productQuantity  // Diğer quantity bilgisi
+                    StockQuantity = stockQuantity,  
+                    RentedQuantity = rentedQuantity,  
+                    RemainingQuantity = remainingQuantity,  
+                    Quantity = productQuantity  
                 });
             }
 
-            // 5. Sonuçları döndürelim
+       
             return ResponseDTO<List<ProductStockInfoDTO>>.Success(productStockInfoList, StatusCodes.Status200OK);
         }
 
