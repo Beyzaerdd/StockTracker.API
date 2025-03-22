@@ -27,10 +27,10 @@ namespace StockTracker.API.Controllers
             return CreateResponse(response);
         }
 
-        [HttpPut("updateCustomerAccount/{id}")]
-        public async Task<IActionResult> UpdateCustomerAccount( int id, [FromBody] UpdateCustomerAccountDTO updateCustomerAccountDTO)
+        [HttpPut("updateCustomerAccount")]
+        public async Task<IActionResult> UpdateCustomerAccount([FromBody] UpdateCustomerAccountDTO updateCustomerAccountDTO)
         {
-            var response = await _customerAccountService.UpdateCustomerAccountAsync(id, updateCustomerAccountDTO);
+            var response = await _customerAccountService.UpdateCustomerAccountAsync(updateCustomerAccountDTO);
             return CreateResponse(response);
         }
 
@@ -50,9 +50,9 @@ namespace StockTracker.API.Controllers
 
 
         [HttpGet("allCustomerAccounts")]
-        public async Task<IActionResult> GetAllCustomerAccounts()
+        public async Task<IActionResult> GetAllCustomerAccounts([FromQuery] int? take = null)
         {
-            var response = await _customerAccountService.GetAllCustomerAccountsAsync();
+            var response = await _customerAccountService.GetAllCustomerAccountsAsync(take);
             return CreateResponse(response);
         }
 

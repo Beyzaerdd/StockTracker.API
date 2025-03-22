@@ -49,6 +49,7 @@ public class RemainingProductService : IRemainingProductService
         remainingProduct.DaysRemaining = updateRemainingProductDTO.DaysRemaining;
 
         _remainingProductRepository.Update(remainingProduct);
+                remainingProduct.UpdatedAt = DateTime.Now;
         await _unitOfWork.SaveChangesAsync();
 
         return ResponseDTO<string>.Success("Kalan ürün güncellendi", StatusCodes.Status200OK);

@@ -15,5 +15,6 @@ namespace StockTracker.Shared.DTOs.ProductDTOs
         public int StockQuantity { get; set; }     // Depodaki mevcut stok
 
         public string Description { get; set; }
+        public int Quantity { get; set; }
     }
 }

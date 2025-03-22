@@ -59,9 +59,10 @@ namespace StockTracker.Business.Concrete
             return ResponseDTO<string>.Fail("Çalışan bulunamadı", StatusCodes.Status404NotFound);
         }
 
-        public async Task<ResponseDTO<IEnumerable<EmployeeDTO>>> GetAllEmployeesAsync()
+        public async Task<ResponseDTO<IEnumerable<EmployeeDTO>>> GetAllEmployeesAsync(int? take=null)
         {
-           var employee= await _employee.GetAllAsync();
+           var employee= await _employee.GetAllAsync(null, orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+                take: take);
             if (employee != null) {
                 var employeeDTO = _mapper.Map<IEnumerable<EmployeeDTO>>(employee);
                 return ResponseDTO<IEnumerable<EmployeeDTO>>.Success(employeeDTO, StatusCodes.Status200OK);
@@ -86,6 +87,7 @@ namespace StockTracker.Business.Concrete
             if (employee != null) {
                 _mapper.Map(updateEmployeeDTO, employee);
                  _employee.Update(employee);
+                employee.UpdatedAt = DateTime.Now;
                 await _unitOfWork.SaveChangesAsync();
                 var employeeDTO = _mapper.Map<EmployeeDTO>(employee);
                 return ResponseDTO<UpdateEmployeeDTO>.Success(_mapper.Map<UpdateEmployeeDTO>(employee), StatusCodes.Status200OK);

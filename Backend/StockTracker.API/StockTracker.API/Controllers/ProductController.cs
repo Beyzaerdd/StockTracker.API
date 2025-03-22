@@ -18,9 +18,9 @@ namespace StockTracker.API.Controllers
         }
 
         [HttpGet("allProducts")]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts([FromQuery] int? take = null)
         {
-            var response = await _productService.GetAllProductsAsync();
+            var response = await _productService.GetAllProductsAsync(take);
             return CreateResponse(response);
         }
 
@@ -49,6 +49,14 @@ namespace StockTracker.API.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var response = await _productService.DeleteProductAsync(id);
+            return CreateResponse(response);
+        }
+
+
+        [HttpGet("getProductStockInfo")]
+        public async Task<IActionResult> GetProductStockInfo()
+        {
+            var response = await _productService.GetProductStockInfoAsync();
             return CreateResponse(response);
         }
 

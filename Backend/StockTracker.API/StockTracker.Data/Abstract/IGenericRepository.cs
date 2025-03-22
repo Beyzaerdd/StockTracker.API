@@ -10,6 +10,7 @@ namespace StockTracker.Data.Abstract
     public interface IGenericRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
+        Task<IQueryable<T>> GetAllQueryableAsync();
 
         Task<IEnumerable<T>> GetAllAsync(
             Expression<Func<T, bool>>? predicate = null,

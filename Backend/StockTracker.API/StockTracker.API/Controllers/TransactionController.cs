@@ -39,16 +39,16 @@ namespace StockTracker.API.Controllers
         }
 
         [HttpGet("Allincoming")]
-        public async Task<IActionResult> GetAllIncomingTransactionDTO()
+        public async Task<IActionResult> GetAllIncomingTransaction([FromQuery] int? take = null)
         {
-            var response = await _transactionService.GetAllIncomingTransactionDTO();
+            var response = await _transactionService.GetAllIncomingTransaction(take);
             return CreateResponse(response);
         }
 
         [HttpGet("Alloutgoing")]
-        public async Task<IActionResult> GetAllOutgoingTransactionDTO()
+        public async Task<IActionResult> GetAllOutgoingTransaction([FromQuery] int? take = null)
         {
-            var response = await _transactionService.GetAllOutgoingTransactionDTO();
+            var response = await _transactionService.GetAllOutgoingTransaction(take);
             return CreateResponse(response);
         }
     }

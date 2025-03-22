@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockTracker.Entity.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace StockTracker.Entity.Concrete
 {
-    public  class CustomerAccount 
+    public  class CustomerAccount : BaseEntity
     {
-        public int Id { get; set; }
+  
         public int CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]

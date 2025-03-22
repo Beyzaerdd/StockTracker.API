@@ -55,10 +55,11 @@ namespace StockTracker.Business.Concrete
             return ResponseDTO<CustomerDTO>.Fail("Müşteri bulunamadı", StatusCodes.Status404NotFound);
         }
 
-        public async Task<ResponseDTO<IEnumerable<CustomerDTO>>> GetAllCustomerAsync()
+        public async Task<ResponseDTO<IEnumerable<CustomerDTO>>> GetAllCustomerAsync(int? take=null)
         {
 
-            var customers=await _customerRepository.GetAllAsync();
+            var customers=await _customerRepository.GetAllAsync(null, orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+                take: take);
             if (customers == null)
             {
                 return ResponseDTO<IEnumerable<CustomerDTO>>.Fail("Müşteriler bulunamadı", StatusCodes.Status404NotFound);
@@ -89,7 +90,8 @@ namespace StockTracker.Business.Concrete
                 return ResponseDTO<UpdateCustomerDTO>.Fail("Müşteri bulunamadı", StatusCodes.Status404NotFound);
             }
             _customerRepository.Update(customer);
-           await _unitOfWork.SaveChangesAsync();
+            customer.UpdatedAt = DateTime.Now;
+            await _unitOfWork.SaveChangesAsync();
             return ResponseDTO<UpdateCustomerDTO>.Success(_mapper.Map<UpdateCustomerDTO>(customer), StatusCodes.Status200OK);
 
         }

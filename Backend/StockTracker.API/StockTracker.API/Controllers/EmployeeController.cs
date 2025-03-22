@@ -18,9 +18,9 @@ namespace StockTracker.API.Controllers
         }
 
         [HttpGet("allEmployees")]
-        public async Task<IActionResult> GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployees([FromQuery] int? take = null)
         {
-            var response = await _employeeService.GetAllEmployeesAsync();
+            var response = await _employeeService.GetAllEmployeesAsync(take);
             return CreateResponse(response);
         }
 

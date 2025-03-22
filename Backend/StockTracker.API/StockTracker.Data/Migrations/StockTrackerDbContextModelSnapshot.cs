@@ -183,7 +183,7 @@ namespace StockTracker.Data.Migrations
                         new
                         {
                             Id = "115c7796-cfac-44de-91b5-916eaae125b5",
-                            CreatedDate = new DateTime(2025, 3, 20, 3, 33, 59, 381, DateTimeKind.Local).AddTicks(7822),
+                            CreatedDate = new DateTime(2025, 3, 22, 5, 18, 9, 408, DateTimeKind.Local).AddTicks(7617),
                             Description = "Administrator role",
                             IsActive = true,
                             Name = "AdminUser",
@@ -192,7 +192,7 @@ namespace StockTracker.Data.Migrations
                         new
                         {
                             Id = "811f466c-9d06-43f8-a054-24aedbb4161b",
-                            CreatedDate = new DateTime(2025, 3, 20, 3, 33, 59, 381, DateTimeKind.Local).AddTicks(7900),
+                            CreatedDate = new DateTime(2025, 3, 22, 5, 18, 9, 408, DateTimeKind.Local).AddTicks(7686),
                             Description = "Regular user role",
                             IsActive = true,
                             Name = "NormalUser",
@@ -278,7 +278,7 @@ namespace StockTracker.Data.Migrations
                         {
                             Id = "c0b7fef7-df2b-4857-9b3d-bc8967ad19ac",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "82cd8e6a-fcd1-456e-809a-0659825b35d2",
+                            ConcurrencyStamp = "79583d45-63e7-435e-bd68-bd524086b325",
                             Email = "adminuser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -286,10 +286,10 @@ namespace StockTracker.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "mehmet@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF2g9fhES6GchuvfqKeM9laCTMPMeFxGTtLVoH6U9gmhLSvSbxvK+a+8hP3Dnn7ubA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBWmxrw/dG5Y7Fa6OdvCXBMHhrZozDGatZTV3mEmTR9OS5Ee7usLwoi5jRtzdhqH/Q==",
                             PhoneNumber = "5255",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "40dc82a0-f176-4e58-ae86-187ee17159b2",
+                            SecurityStamp = "bd2834ef-6d13-49f9-953d-9ded83d11326",
                             TwoFactorEnabled = false,
                             UserName = "mehmet@gmail.com"
                         },
@@ -297,7 +297,7 @@ namespace StockTracker.Data.Migrations
                         {
                             Id = "14a0183f-1e96-4930-a83d-6ef5f22d8c09",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b5c13e8-1bfe-437b-beaf-b13163561473",
+                            ConcurrencyStamp = "6c69b9c7-ee12-4082-9650-9f05a0d3c25d",
                             Email = "normaluser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin2",
@@ -305,9 +305,9 @@ namespace StockTracker.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@GMAIL.COM",
                             NormalizedUserName = "admin@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECc7Gy7nwr6JR4qHWPllKpvadAEdK0I2o/yS2B2LiVWep7tPESHQLMAOIbhtl59R0w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPKHc1bPB1ZMfWX8jdXJmefnQT6CRZw/Ng+XJcUsM+RUbZfzhdwJ1xI7Nr9064mDgw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8409a06-5002-4218-b4e6-e0d0be34082e",
+                            SecurityStamp = "7255d51c-c147-4ccf-a895-4e226cb8f579",
                             TwoFactorEnabled = false,
                             UserName = "normaluser@gmail.com"
                         });
@@ -324,6 +324,9 @@ namespace StockTracker.Data.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -342,6 +345,9 @@ namespace StockTracker.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
@@ -351,6 +357,7 @@ namespace StockTracker.Data.Migrations
                         {
                             Id = 1,
                             Address = "dfdfdf",
+                            CreatedAt = new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(3985),
                             Email = "sdsds",
                             LastName = "fgdfd",
                             Name = "dfdf",
@@ -360,6 +367,7 @@ namespace StockTracker.Data.Migrations
                         {
                             Id = 2,
                             Address = "dfdfdf",
+                            CreatedAt = new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4001),
                             Email = "sdsds",
                             LastName = "fgdfd",
                             Name = "dfdf",
@@ -374,6 +382,9 @@ namespace StockTracker.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -397,6 +408,9 @@ namespace StockTracker.Data.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
@@ -417,6 +431,9 @@ namespace StockTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("CustomerAccountId")
                         .HasColumnType("int");
 
@@ -434,6 +451,9 @@ namespace StockTracker.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerAccountId");
@@ -450,6 +470,9 @@ namespace StockTracker.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
@@ -477,6 +500,9 @@ namespace StockTracker.Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
@@ -493,11 +519,17 @@ namespace StockTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -516,11 +548,17 @@ namespace StockTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -536,6 +574,9 @@ namespace StockTracker.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -548,8 +589,14 @@ namespace StockTracker.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -559,17 +606,21 @@ namespace StockTracker.Data.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedAt = new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4028),
                             Description = "Laptop description",
                             MonthlyPrice = 300.00m,
                             Name = "Laptop",
+                            Quantity = 0,
                             StockQuantity = 100
                         },
                         new
                         {
                             Id = 2,
+                            CreatedAt = new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4033),
                             Description = "Projector description",
                             MonthlyPrice = 150.00m,
                             Name = "Projector",
+                            Quantity = 0,
                             StockQuantity = 200
                         });
                 });
@@ -582,6 +633,9 @@ namespace StockTracker.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("DailyPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -593,6 +647,9 @@ namespace StockTracker.Data.Migrations
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -609,6 +666,9 @@ namespace StockTracker.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -620,6 +680,9 @@ namespace StockTracker.Data.Migrations
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("VATRate")
                         .HasColumnType("decimal(18,2)");
@@ -639,6 +702,9 @@ namespace StockTracker.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("MonthlyPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -650,6 +716,9 @@ namespace StockTracker.Data.Migrations
 
                     b.Property<int>("RentalId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -668,6 +737,9 @@ namespace StockTracker.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("QuantityReturned")
                         .HasColumnType("int");
 
@@ -675,6 +747,9 @@ namespace StockTracker.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

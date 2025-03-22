@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockTracker.Entity.Abstract;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace StockTracker.Entity.Concrete
 {
-    public class RentalItem
+    public class RentalItem : BaseEntity
     {
-        public int Id { get; set; }
+
         public int RentalId { get; set; }
         public Rental Rental { get; set; }
         public int ProductId { get; set; }

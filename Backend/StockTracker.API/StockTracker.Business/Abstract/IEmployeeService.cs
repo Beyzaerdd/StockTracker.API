@@ -11,7 +11,7 @@ namespace StockTracker.Business.Abstract
     public interface IEmployeeService
     {
         Task<ResponseDTO<EmployeeDTO>> CreateEmployeeAsync(CreateEmployeeDTO createEmployeeDTO);
-        Task<ResponseDTO<IEnumerable<EmployeeDTO>>> GetAllEmployeesAsync();
+        Task<ResponseDTO<IEnumerable<EmployeeDTO>>> GetAllEmployeesAsync(int? take = null);
         Task<ResponseDTO<EmployeeDTO>> GetEmployeeByIdAsync(int id);
         Task<ResponseDTO<UpdateEmployeeDTO>> UpdateEmployeeAsync(UpdateEmployeeDTO updateEmployeeDTO);
         Task<ResponseDTO<string>> DeleteEmployeeAsync(int id);

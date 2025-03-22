@@ -18,9 +18,9 @@ namespace StockTracker.API.Controllers
         }
 
         [HttpGet("allRentals")]
-        public async Task<IActionResult> GetAllRentals()
+        public async Task<IActionResult> GetAllRentals([FromQuery] int? take = null)
         {
-            var response = await _rentalService.GetAllRentalsAsync();
+            var response = await _rentalService.GetAllRentalsAsync(take);
             return CreateResponse(response);
         }
 

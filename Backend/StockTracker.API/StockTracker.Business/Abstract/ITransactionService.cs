@@ -15,7 +15,7 @@ namespace StockTracker.Business.Abstract
         Task<ResponseDTO<string>> AddOutgoingTransactionAsync(CreateOutgoingTransactionDTO outgoingTransactionDTO);
         Task<ResponseDTO<decimal>> GetNetProfitAsync();
 
-        Task<ResponseDTO<IEnumerable<IncomingTransactionDTO>>> GetAllIncomingTransactionDTO();
-        Task<ResponseDTO<IEnumerable<OutgoingTransactionDTO>>> GetAllOutgoingTransactionDTO();
+        Task<ResponseDTO<IEnumerable<IncomingTransactionDTO>>> GetAllIncomingTransaction(int? take = null);
+        Task<ResponseDTO<IEnumerable<OutgoingTransactionDTO>>> GetAllOutgoingTransaction(int? take = null);
     }
 }

@@ -11,10 +11,10 @@ namespace StockTracker.Business.Abstract
     public interface ICustomerAccountService
     {
         Task<ResponseDTO<string>> CreateCustomerAccountAsync(CreateCustomerAccountDTO createCustomerAccountDTO);
-        Task<ResponseDTO<UpdateCustomerAccountDTO>> UpdateCustomerAccountAsync(int id, UpdateCustomerAccountDTO updateCustomerAccountDTO);
+        Task<ResponseDTO<UpdateCustomerAccountDTO>> UpdateCustomerAccountAsync(UpdateCustomerAccountDTO updateCustomerAccountDTO);
         Task<ResponseDTO<string>> DeleteCustomerAccountAsync(int id);
         Task<ResponseDTO<CustomerAccountDTO>> GetCustomerAccountByIdAsync(int id);
-        Task<ResponseDTO<List<CustomerAccountDTO>>> GetAllCustomerAccountsAsync();
+        Task<ResponseDTO<List<CustomerAccountDTO>>> GetAllCustomerAccountsAsync(int? take = null);
         Task<ResponseDTO<IEnumerable<CustomerAccountDTO>>> GetCustomerAccountsAsync(int customerId);
 
     }

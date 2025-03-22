@@ -63,6 +63,11 @@ namespace StockTracker.Data.Concrete.Repositories
             {
                 return await _dbSet.ToListAsync();
             }
+
+        public async Task<IQueryable<T>> GetAllQueryableAsync()
+        {
+            return _dbSet.AsQueryable();
+        }
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {
             if (entities == null || !entities.Any())

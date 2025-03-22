@@ -44,36 +44,56 @@ namespace StockTracker.Business.Concrete
             return ResponseDTO<string>.Success("Müşteri hesabı başarıyla oluşturuldu.", StatusCodes.Status201Created);
         }
 
-        public async Task<ResponseDTO<UpdateCustomerAccountDTO>> UpdateCustomerAccountAsync(int id, UpdateCustomerAccountDTO updateCustomerAccountDTO)
+        public async Task<ResponseDTO<UpdateCustomerAccountDTO>> UpdateCustomerAccountAsync(UpdateCustomerAccountDTO updateCustomerAccountDTO)
         {
-            var customerAccount = await _unitOfWork.GetRepository<CustomerAccount>().GetByIdAsync(id);
+            var customerAccount = await _unitOfWork.GetRepository<CustomerAccount>().GetByIdAsync(updateCustomerAccountDTO.Id);
 
             if (customerAccount == null)
             {
                 return ResponseDTO<UpdateCustomerAccountDTO>.Fail("Müşteri hesabı bulunamadı.", StatusCodes.Status404NotFound);
             }
 
-       
+            // Ödenen tutarın güncellenmesi
             if (updateCustomerAccountDTO.PaidAmount > 0)
             {
                 customerAccount.PaidAmount += updateCustomerAccountDTO.PaidAmount;
 
-            
                 if (customerAccount.PaidAmount > customerAccount.TotalAmount)
                 {
                     return ResponseDTO<UpdateCustomerAccountDTO>.Fail("Ödenen tutar toplam borcu aşamaz.", StatusCodes.Status400BadRequest);
                 }
             }
 
-     
+            // Toplam borç tutarının güncellenmesi
             if (updateCustomerAccountDTO.TotalAmount > 0)
             {
                 customerAccount.TotalAmount = updateCustomerAccountDTO.TotalAmount;
             }
 
+            // Tarihlerin güncellenmesi (Eğer varsa)
+            if (updateCustomerAccountDTO.StartDate != null)
+            {
+                customerAccount.StartDate = updateCustomerAccountDTO.StartDate;
+            }
+
+            if (updateCustomerAccountDTO.EndDate != null)
+            {
+                customerAccount.EndDate = updateCustomerAccountDTO.EndDate;
+            }
+
+            // Açıklamanın güncellenmesi
+            if (!string.IsNullOrEmpty(updateCustomerAccountDTO.Description))
+            {
+                customerAccount.Description = updateCustomerAccountDTO.Description;
+            }
+
+            // Güncellenen entity'yi kaydediyoruz
+            customerAccount.UpdatedAt = DateTime.Now;
+
+            _unitOfWork.GetRepository<CustomerAccount>().Update(customerAccount);
             await _unitOfWork.SaveChangesAsync();
 
-    
+            // DTO'yu geri döndürüyoruz
             var updatedDTO = new UpdateCustomerAccountDTO
             {
                 Id = customerAccount.Id,
@@ -82,7 +102,6 @@ namespace StockTracker.Business.Concrete
                 EndDate = customerAccount.EndDate,
                 TotalAmount = customerAccount.TotalAmount,
                 PaidAmount = customerAccount.PaidAmount,
-       
                 Description = customerAccount.Description
             };
 
@@ -92,8 +111,9 @@ namespace StockTracker.Business.Concrete
 
 
 
- 
- 
+
+
+
         public async Task<ResponseDTO<string>> DeleteCustomerAccountAsync(int id)
         {
             var customerAccount = await _unitOfWork.GetRepository<CustomerAccount>().GetByIdAsync(id);
@@ -134,9 +154,15 @@ namespace StockTracker.Business.Concrete
         }
 
 
-        public async Task<ResponseDTO<List<CustomerAccountDTO>>> GetAllCustomerAccountsAsync()
+        public async Task<ResponseDTO<List<CustomerAccountDTO>>> GetAllCustomerAccountsAsync(int? take = null)
         {
-            var customerAccounts = await _unitOfWork.GetRepository<CustomerAccount>().GetAllAsync();
+            var customerAccounts = await _unitOfWork.GetRepository<CustomerAccount>()
+      .GetAllAsync(
+        predicate: null, 
+        orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+        take: take,
+        includes: query => query.Include(ra => ra.Customer)
+    );
 
             if (customerAccounts == null)
             {
@@ -152,7 +178,8 @@ namespace StockTracker.Business.Concrete
                 EndDate = account.EndDate,
                 TotalAmount = account.TotalAmount,
                 PaidAmount = account.PaidAmount,
-                Description = account.Description
+                Description = account.Description,
+
             }).ToList();
 
             return ResponseDTO<List<CustomerAccountDTO>>.Success(customerAccountDTOs, StatusCodes.Status200OK);

@@ -252,6 +252,7 @@ public class RentalService : IRentalService
 
 
         rental.TotalPrice = totalPrice;
+        rental.UpdatedAt = DateTime.Now;
 
         await _unitOfWork.SaveChangesAsync();
 
@@ -268,9 +269,10 @@ public class RentalService : IRentalService
 
         return ResponseDTO<string>.Success("Kiralama başarıyla güncellendi.", StatusCodes.Status200OK);
     }
-    public async Task<ResponseDTO<List<RentalDTO>>> GetAllRentalsAsync()
+    public async Task<ResponseDTO<List<RentalDTO>>> GetAllRentalsAsync(int? take=null)
     {
-        var rentals = await _unitOfWork.GetRepository<Rental>().GetAllAsync();
+        var rentals = await _unitOfWork.GetRepository<Rental>().GetAllAsync(null, orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+                take: take);
 
         if (rentals == null || !rentals.Any())
         {

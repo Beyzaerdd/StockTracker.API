@@ -39,6 +39,7 @@ namespace StockTracker.Business.Mapping
             CreateMap<Product, ProductDTO>().ReverseMap();
             CreateMap<CreateProductDTO, Product>();
             CreateMap<UpdateProductDTO, Product>();
+            CreateMap<ProductStockInfoDTO, Product>().ReverseMap();
 
             // Rental Mapping
             CreateMap<Rental, RentalDTO>()

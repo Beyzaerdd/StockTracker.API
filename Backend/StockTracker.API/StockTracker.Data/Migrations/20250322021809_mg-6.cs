@@ -68,7 +68,9 @@ namespace StockTracker.Data.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +89,9 @@ namespace StockTracker.Data.Migrations
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,7 +106,9 @@ namespace StockTracker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,7 +123,9 @@ namespace StockTracker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,7 +141,10 @@ namespace StockTracker.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MonthlyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StockQuantity = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -258,7 +269,9 @@ namespace StockTracker.Data.Migrations
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PaidAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerId1 = table.Column<int>(type: "int", nullable: true)
+                    CustomerId1 = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -286,7 +299,9 @@ namespace StockTracker.Data.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    VATRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    VATRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -310,7 +325,9 @@ namespace StockTracker.Data.Migrations
                     PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReceivedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerAccountId1 = table.Column<int>(type: "int", nullable: true)
+                    CustomerAccountId1 = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,7 +354,9 @@ namespace StockTracker.Data.Migrations
                     RentalId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    MonthlyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    MonthlyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -365,7 +384,9 @@ namespace StockTracker.Data.Migrations
                     RentalItemId = table.Column<int>(type: "int", nullable: false),
                     DaysRemaining = table.Column<int>(type: "int", nullable: false),
                     DailyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -386,7 +407,9 @@ namespace StockTracker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RentalItemId = table.Column<int>(type: "int", nullable: false),
                     QuantityReturned = table.Column<int>(type: "int", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -404,8 +427,8 @@ namespace StockTracker.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "IsActive", "Name", "NormalizedName", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { "115c7796-cfac-44de-91b5-916eaae125b5", null, new DateTime(2025, 3, 20, 3, 33, 59, 381, DateTimeKind.Local).AddTicks(7822), "Administrator role", true, "AdminUser", "ADMINUSER", null },
-                    { "811f466c-9d06-43f8-a054-24aedbb4161b", null, new DateTime(2025, 3, 20, 3, 33, 59, 381, DateTimeKind.Local).AddTicks(7900), "Regular user role", true, "NormalUser", "NORMALUSER", null }
+                    { "115c7796-cfac-44de-91b5-916eaae125b5", null, new DateTime(2025, 3, 22, 5, 18, 9, 408, DateTimeKind.Local).AddTicks(7617), "Administrator role", true, "AdminUser", "ADMINUSER", null },
+                    { "811f466c-9d06-43f8-a054-24aedbb4161b", null, new DateTime(2025, 3, 22, 5, 18, 9, 408, DateTimeKind.Local).AddTicks(7686), "Regular user role", true, "NormalUser", "NORMALUSER", null }
                 });
 
             migrationBuilder.InsertData(
@@ -413,26 +436,26 @@ namespace StockTracker.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "14a0183f-1e96-4930-a83d-6ef5f22d8c09", 0, "1b5c13e8-1bfe-437b-beaf-b13163561473", "normaluser@gmail.com", true, "Admin2", "User", false, null, "admin@GMAIL.COM", "admin@GMAIL.COM", "AQAAAAIAAYagAAAAECc7Gy7nwr6JR4qHWPllKpvadAEdK0I2o/yS2B2LiVWep7tPESHQLMAOIbhtl59R0w==", null, false, "e8409a06-5002-4218-b4e6-e0d0be34082e", false, "normaluser@gmail.com" },
-                    { "c0b7fef7-df2b-4857-9b3d-bc8967ad19ac", 0, "82cd8e6a-fcd1-456e-809a-0659825b35d2", "adminuser@gmail.com", true, "Admin", "User", false, null, "ADMINUSER@GMAIL.COM", "mehmet@GMAIL.COM", "AQAAAAIAAYagAAAAEF2g9fhES6GchuvfqKeM9laCTMPMeFxGTtLVoH6U9gmhLSvSbxvK+a+8hP3Dnn7ubA==", "5255", false, "40dc82a0-f176-4e58-ae86-187ee17159b2", false, "mehmet@gmail.com" }
+                    { "14a0183f-1e96-4930-a83d-6ef5f22d8c09", 0, "6c69b9c7-ee12-4082-9650-9f05a0d3c25d", "normaluser@gmail.com", true, "Admin2", "User", false, null, "admin@GMAIL.COM", "admin@GMAIL.COM", "AQAAAAIAAYagAAAAEPKHc1bPB1ZMfWX8jdXJmefnQT6CRZw/Ng+XJcUsM+RUbZfzhdwJ1xI7Nr9064mDgw==", null, false, "7255d51c-c147-4ccf-a895-4e226cb8f579", false, "normaluser@gmail.com" },
+                    { "c0b7fef7-df2b-4857-9b3d-bc8967ad19ac", 0, "79583d45-63e7-435e-bd68-bd524086b325", "adminuser@gmail.com", true, "Admin", "User", false, null, "ADMINUSER@GMAIL.COM", "mehmet@GMAIL.COM", "AQAAAAIAAYagAAAAEBWmxrw/dG5Y7Fa6OdvCXBMHhrZozDGatZTV3mEmTR9OS5Ee7usLwoi5jRtzdhqH/Q==", "5255", false, "bd2834ef-6d13-49f9-953d-9ded83d11326", false, "mehmet@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "Address", "Email", "LastName", "Name", "Phone" },
+                columns: new[] { "Id", "Address", "CreatedAt", "Email", "LastName", "Name", "Phone", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "dfdfdf", "sdsds", "fgdfd", "dfdf", "34322" },
-                    { 2, "dfdfdf", "sdsds", "fgdfd", "dfdf", "34322" }
+                    { 1, "dfdfdf", new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(3985), "sdsds", "fgdfd", "dfdf", "34322", null },
+                    { 2, "dfdfdf", new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4001), "sdsds", "fgdfd", "dfdf", "34322", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Description", "MonthlyPrice", "Name", "StockQuantity" },
+                columns: new[] { "Id", "CreatedAt", "Description", "MonthlyPrice", "Name", "Quantity", "StockQuantity", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Laptop description", 300.00m, "Laptop", 100 },
-                    { 2, "Projector description", 150.00m, "Projector", 200 }
+                    { 1, new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4028), "Laptop description", 300.00m, "Laptop", 0, 100, null },
+                    { 2, new DateTime(2025, 3, 22, 5, 18, 9, 482, DateTimeKind.Local).AddTicks(4033), "Projector description", 150.00m, "Projector", 0, 200, null }
                 });
 
             migrationBuilder.InsertData(

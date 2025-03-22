@@ -22,9 +22,9 @@ namespace StockTracker.API.Controllers
 
 
         [HttpGet("allCustomers")]
-        public async Task<IActionResult> GetAllCustomer()
+        public async Task<IActionResult> GetAllCustomer([FromQuery] int? take = null)
         {
-            var response = await _customerService.GetAllCustomerAsync();
+            var response = await _customerService.GetAllCustomerAsync(take);
             return CreateResponse(response);
         }
 

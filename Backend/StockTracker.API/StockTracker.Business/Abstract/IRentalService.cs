@@ -20,7 +20,7 @@ namespace StockTracker.Business.Abstract
         Task<ResponseDTO<string>> DeleteRentalAsync(int rentalId);
         Task<ResponseDTO<string>> UpdateRentalItemAsync(int rentalId, int rentalItemId, UpdateRentalItemDTO updateRentalItemDTO);
         Task<ResponseDTO<string>> DeleteRentalItemAsync(int rentalId, int rentalItemId);
-        Task<ResponseDTO<List<RentalDTO>>> GetAllRentalsAsync();  // Yeni metod
+        Task<ResponseDTO<List<RentalDTO>>> GetAllRentalsAsync(int? take = null);  // Yeni metod
         Task<ResponseDTO<RentalDTO>> GetRentalByIdAsync(int rentalId);
 
     }

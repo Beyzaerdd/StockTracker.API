@@ -11,9 +11,10 @@ namespace StockTracker.Business.Abstract
     public interface IProductService
     {
         Task<ResponseDTO<ProductDTO>> GetProductByIdAsync(int id);
-        Task<ResponseDTO<IEnumerable<ProductDTO>>> GetAllProductsAsync();
+        Task<ResponseDTO<IEnumerable<ProductDTO>>> GetAllProductsAsync(int? take = null);
         Task<ResponseDTO<ProductDTO>> CreateProductAsync(CreateProductDTO createProductDTO);
         Task<ResponseDTO<ProductDTO>> UpdateProductAsync(UpdateProductDTO updateProductDTO);
         Task<ResponseDTO<string>> DeleteProductAsync(int id);
+        Task<ResponseDTO<List<ProductStockInfoDTO>>> GetProductStockInfoAsync();
     }
 }

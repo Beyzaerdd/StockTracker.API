@@ -63,10 +63,11 @@ namespace StockTracker.Business.Concrete
             return ResponseDTO<decimal>.Success(netProfit, StatusCodes.Status200OK);
         }
 
-        public async Task<ResponseDTO<IEnumerable<IncomingTransactionDTO>>> GetAllIncomingTransactionDTO()
+        public async Task<ResponseDTO<IEnumerable<IncomingTransactionDTO>>> GetAllIncomingTransaction(int? take=null)
         {
 
-            var incomingTransactions = await _unitOfWork.GetRepository<IncomingTransaction>().GetAllAsync();
+            var incomingTransactions = await _unitOfWork.GetRepository<IncomingTransaction>().GetAllAsync(null, orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+                take: take);
             if (incomingTransactions == null || !incomingTransactions.Any())
             {
                 return ResponseDTO<IEnumerable<IncomingTransactionDTO>>.Fail("Hiç gelen işlem bulunamadı.", StatusCodes.Status404NotFound);
@@ -77,9 +78,10 @@ namespace StockTracker.Business.Concrete
             return ResponseDTO<IEnumerable<IncomingTransactionDTO>>.Success(incomingTransactionDTOs, StatusCodes.Status200OK);
         }
 
-        public async Task<ResponseDTO<IEnumerable<OutgoingTransactionDTO>>> GetAllOutgoingTransactionDTO()
+        public async Task<ResponseDTO<IEnumerable<OutgoingTransactionDTO>>> GetAllOutgoingTransaction(int? take=null)
         {
-            var outgoingTransactions = await _unitOfWork.GetRepository<OutgoingTransaction>().GetAllAsync();
+            var outgoingTransactions = await _unitOfWork.GetRepository<OutgoingTransaction>().GetAllAsync(null, orderBy: query => query.OrderByDescending(x => x.CreatedAt),
+                take: take);
             if (outgoingTransactions == null || !outgoingTransactions.Any())
             {
                 return ResponseDTO<IEnumerable<OutgoingTransactionDTO>>.Fail("Hiç giden işlem bulunamadı.", StatusCodes.Status404NotFound);
