@@ -1,0 +1,52 @@
+﻿@model StockTracker.MVC.Areas.Admin.Models.ProductModels.ProductModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <!-- Main Card with shadow, rounded edges, and modern design -->
+            <div class="card shadow-lg border-0 rounded-3 mb-4">
+                <div class="card-header text-center bg-info text-white">
+                    <h4><i class="bi bi-person-circle"></i> Ürün Detayları <span>👀</span></h4>
+                </div>
+            </div>
+
+            <!-- Employee Info Cards -->
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-person-fill"></i> <strong>Ürün adı :</strong> @Model.Name </h5>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-telephone-fill"></i> <strong>Aylık kiralama ücreti:</strong> @Model.MonthlyPrice.ToString("C2")</h5>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-briefcase-fill"></i> <strong>Stok Adeti:</strong> @Model.StockQuantity</h5>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-currency-dollar"></i> <strong>Açıklama:</strong> @Model.Description</h5>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="text-center">
+                    <a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="btn btn-primary">
+                        <i class="bi bi-arrow-left-circle"></i> Geri Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+﻿@model IEnumerable<StockTracker.MVC.Areas.Admin.Models.ProductModels.ProductModel>
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+     var takeValue = Context.Request.Query["take"].ToString(); // Request.Query'den alınan değer
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center gap-1">
+                    <h4 class="card-title flex-grow-1">Ürünler</h4>
+           <form method="get" class="d-flex align-items-center gap-2">
+    <label for="productCount" class="mb-0">Kaç ürün gösterilsin?</label>
+    <select name="take" id="productCount" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="11" @(takeValue == "11" ? "selected" : "")>11</option>
+        <option value="20" @(takeValue == "20" ? "selected" : "")>20</option>
+        <option value="50" @(takeValue == "50" ? "selected" : "")>50</option>
+        <option value="100" @(takeValue == "100" ? "selected" : "")>100</option>
+    </select>
+</form>
+
+                    <a href="@Url.Action("Create", "Product", new { area = "Admin" })" class="btn btn-sm btn-primary">
+                        Yeni ürün Oluştur
+                    </a>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0 table-hover table-centered">
+                            <thead class="bg-light-subtle">
+                                <tr>
+                                    <th style="width: 20px;">
+                                        <div class="form-check ms-1">
+                                            <input type="checkbox" class="form-check-input" id="customCheck1">
+                                            <label class="form-check-label" for="customCheck1"></label>
+                                        </div>
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Aylık Birim Fiyatı </th>
+                                    <th>Stok Adedi</th>
+                                    <th>Açıklama</th>
+                                    <th></th>
+                                    <th></th>
+                                 
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model) // EmployeeModel verisiyle her bir çalışan için satır oluşturulacak
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check ms-1">
+                                                <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>@product.Id</td>
+                                        <td>@product.Name</td>
+                                        <td>@product.MonthlyPrice</td>
+
+                                        <td>@product.StockQuantity</td>
+
+                                        <td>@product.Description</td>
+                                  
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="@Url.Action("Details", "Product", new { id = product.Id, area = "Admin" })" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon> Detay</a>
+                                                <a href="@Url.Action("Edit", "Product", new { id = product.Id, area = "Admin" })" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon> Düzenle</a>
+                                                <a href="javascript:void(0);" class="btn btn-soft-danger btn-sm" onclick="confirmDelete(@product.Id)">
+                                                    <iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon> Sil
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+  
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Silmek istediğinizden emin misiniz?',
+            text: "Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, sil!',
+            cancelButtonText: 'Hayır, iptal et'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // AJAX isteği gönderiliyor
+                $.ajax({
+                    url: '@Url.Action("Delete", "Product", new { area = "Admin" })',
+                    type: 'POST',
+                    data: { id: productId },  // Silinecek employeeId
+                    success: function (response) {
+                        if (response.success) {  // Sunucudan gelen başarı durumunu kontrol et
+                            Swal.fire(
+                                'Başarılı!',
+                                'Çalışan başarıyla silindi.',
+                                'success'
+                            );
+                            // İstenirse sayfa yenileyebilirsiniz
+                            // window.location.reload();
+                        } else {
+                            Swal.fire(
+                                'Hata!',
+                                'Çalışan silinirken bir hata oluştu.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Hata!',
+                            'Silme işlemi sırasında bir hata oluştu.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+</script>
+

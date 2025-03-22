@@ -1,0 +1,70 @@
+﻿@model List<StockTracker.MVC.Areas.Admin.Models.ProductModels.ProductStockInfoModel>
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center gap-1">
+                    <h4 class="card-title flex-grow-1">Ürün Stok Bilgisi</h4>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0 table-hover table-centered">
+                            <thead class="bg-light-subtle">
+                                <tr>
+                                    <th style="width: 20px;">
+                                        <div class="form-check ms-1">
+                                            <input type="checkbox" class="form-check-input" id="customCheck1">
+                                            <label class="form-check-label" for="customCheck1"></label>
+                                        </div>
+                                    </th>
+                                    <th>Ürün Adı</th>
+                                    <th>Ürün Adeti</th>
+                                    <th>Stok Miktarı</th>
+                                    <th>Aktif Kiralanan Miktar</th>
+                                    <th>Kiralamalardan kalan Miktar</th>
+                           
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check ms-1">
+                                                <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>@product.ProductName</td>
+                                        <td>@product.Quantity</td>
+                                        <td>@product.StockQuantity</td>
+                                        <td>@product.RentedQuantity</td>
+                                        <td>@product.RemainingQuantity</td>
+                                      
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer border-top">
+                    <nav aria-label="Sayfalama">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Önceki</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Sonraki</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
