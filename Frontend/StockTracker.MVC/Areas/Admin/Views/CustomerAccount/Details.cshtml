@@ -1,0 +1,81 @@
+﻿@model StockTracker.MVC.Areas.Admin.Models.CustomerAccountModels.CustomerAccountModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <!-- Main Card with shadow, rounded edges, and modern design -->
+            <div class="card shadow-lg border-0 rounded-3 mb-4">
+                <div class="card-header text-center bg-gradient text-white">
+                    <h4><i class="bi bi-person-circle"></i> Müşteri Hesap Detayları <span>💳</span></h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-center text-primary"><i class="bi bi-person-fill"></i> <strong>@Model.CustomerName</strong></h5>
+                    <p class="text-center text-muted">Müşteri Bilgileri ve Hesap Durumu</p>
+                </div>
+            </div>
+
+            <!-- Customer Account Info Cards (Styled and arranged vertically) -->
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-calendar-fill"></i> <strong>Başlangıç Tarihi:</strong></h5>
+                    <p class="text-muted">@Model.StartDate.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-calendar-check-fill"></i> <strong>Bitiş Tarihi:</strong></h5>
+                    <p class="text-muted">@Model.EndDate.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-cash-stack"></i> <strong>Toplam Tutar:</strong></h5>
+                    <p class="text-muted">@Model.TotalAmount.ToString("C")</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-cash-coin"></i> <strong>Ödenen Tutar:</strong></h5>
+                    <p class="text-muted">@Model.PaidAmount.ToString("C")</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-bar-chart-line-fill"></i> <strong>Kalan Tutar:</strong></h5>
+                    <p class="text-muted">@Model.RemainingAmount.ToString("C")</p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5><i class="bi bi-info-circle-fill"></i> <strong>Açıklama:</strong></h5>
+                    <p class="text-muted">@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- Back Button with a playful icon -->
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "Customer", new { area = "Admin" })" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Geri Dön
+                </a>
+            </div>
+
+            <!-- Ödeme Al Butonu -->
+            <div class="text-center mt-4">
+                <form action="@Url.Action("ReceivePayment", "CustomerPayment", new { area = "Admin" })" method="post">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-credit-card-fill"></i> Ödeme Al
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
