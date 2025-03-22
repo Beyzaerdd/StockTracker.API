@@ -1,0 +1,26 @@
+﻿@model StockTracker.MVC.Areas.Admin.Models.CustomerPaymentModels.CustomerPaymentCreateModel
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+}
+<form asp-action="ReceivePayment" method="post">
+    <input type="hidden" asp-for="CustomerAccountId" />
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>Miktar</label>
+        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Ödeme Yöntemi</label>
+        @Html.DropDownListFor(model => model.PaymentMethod, new SelectList(new[] { "Nakit", "Kredi Kartı", "Banka Havalesi" }), new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Alıcı</label>
+        @Html.TextBoxFor(model => model.ReceivedBy, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Ödeme Al</button>
+</form>

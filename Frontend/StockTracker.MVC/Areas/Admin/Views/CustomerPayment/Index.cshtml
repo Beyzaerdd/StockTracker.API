@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StockTracker.MVC.Areas.Admin.Models.CustomerPaymentModels.CustomerPaymentModel>
+
+@{
+    Layout = "_Layout"; // Sayfa düzenini belirtmek için
+
+}
+<div class="alert alert-info">
+    <strong>Toplam Borç:</strong> @ViewBag.TotalAmount ₺
+</div>
+<div class="alert alert-info">
+    <strong>Ödenen Tutar:</strong> @ViewBag.PaidAmount ₺
+</div>
+<div class="alert alert-info">
+    <strong>Kalan Borç:</strong> @ViewBag.RemainingAmount ₺
+</div>
+
+<!-- Müşteri hesabının tarih bilgilerini göster -->
+<div class="alert alert-info">
+    <strong>Başlangıç Tarihi:</strong> @ViewBag.StartDate
+</div>
+<div class="alert alert-info">
+    <strong>Bitiş Tarihi:</strong> @ViewBag.EndDate
+</div>
+<a href="@Url.Action("ReceivePayment", "CustomerPayment", new { id = ViewBag.CustomerAccountId })" class="btn btn-success">Yeni Ödeme Al</a>
+
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>Miktar</th>
+            <th>Ödeme Yöntemi</th>
+            <th>Alıcı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+                <td>@payment.Amount ₺</td>
+                <td>@payment.PaymentMethod</td>
+                <td>@payment.ReceivedBy</td>
+            </tr>
+        }
+    </tbody>
+</table>
