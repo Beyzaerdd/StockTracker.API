@@ -54,10 +54,10 @@ namespace StockTracker.MVC.Areas.Admin.Services.Concrete
             return result;
         }
 
-        public async Task<ResponseViewModel<IEnumerable<CustomerModel>>> GetAllCustomerAsync()
+        public async Task<ResponseViewModel<IEnumerable<CustomerModel>>> GetAllCustomerAsync(int count = 11)
         {
             var client = GetHttpClient();
-            var response = await client.GetFromJsonAsync<ResponseViewModel<IEnumerable<CustomerModel>>>("customer/allCustomers");
+            var response = await client.GetFromJsonAsync<ResponseViewModel<IEnumerable<CustomerModel>>>($"customer/allCustomers?take={count}");
 
             if (response == null || !response.success)
             {

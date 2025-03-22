@@ -18,5 +18,7 @@ namespace StockTracker.MVC.Areas.Admin.Models.ProductModels
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
+        [JsonPropertyName("quantity")]
+        public int Quantity { get; set; }
     }
 }

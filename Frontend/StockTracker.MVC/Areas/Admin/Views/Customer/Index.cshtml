@@ -2,6 +2,7 @@
 
 @{
     Layout = "_Layout"; // Sayfa düzenini belirtmek için
+    var takeValue = Context.Request.Query["take"].ToString(); // Request.Query'den alınan değer
 }
 
 <div class="container-fluid">
@@ -10,7 +11,15 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center gap-1">
                     <h4 class="card-title flex-grow-1">Müşteriler</h4>
-
+                    <form method="get" class="d-flex align-items-center gap-2">
+                        <label for="customerCount" class="mb-0">Kaç Müşteri gösterilsin?</label>
+                        <select name="take" id="customerCount" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="11" @(takeValue == "11" ? "selected" : "")>11</option>
+                            <option value="20" @(takeValue == "20" ? "selected" : "")>20</option>
+                            <option value="50" @(takeValue == "50" ? "selected" : "")>50</option>
+                            <option value="100" @(takeValue == "100" ? "selected" : "")>100</option>
+                        </select>
+                    </form>
                     <a href="@Url.Action("Create", "Customer", new { area = "Admin" })" class="btn btn-sm btn-primary">
                         Yeni Müşteri Oluştur
                     </a>
@@ -60,6 +69,9 @@
                                                 <a href="@Url.Action("Details", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon> Detay</a>
                                                 <a href="@Url.Action("Edit", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon> Düzenle</a>
                                                 <a href="@Url.Action("Delete", "Customer", new { id = customer.Id, area = "Admin" })" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon> Sil</a>
+                                                <a href="@Url.Action("Index", "CustomerAccount", new { id = customer.Id, area = "Admin" })" class="btn btn-soft-primary btn-sm">
+                                                    <iconify-icon icon="solar:wallet-money-broken" class="align-middle fs-18"></iconify-icon> Müşteri Carisi
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>

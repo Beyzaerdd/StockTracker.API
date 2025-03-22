@@ -4,6 +4,7 @@ using StockTracker.MVC.Areas.Admin.Services.Abstract;
 using StockTracker.MVC.Areas.Admin.Models.EmployeeModels;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using StockTracker.MVC.Areas.Admin.Models.ProductModels;
 
 namespace StockTracker.MVC.Areas.Admin.Controllers
 {
@@ -19,9 +20,10 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             _toaster = toaster;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? take)
         {
-            var response = await _employeeService.GetAllEmployeesAsync();
+            int employeeCount = take ?? 11;
+            var response = await _employeeService.GetAllEmployeesAsync(employeeCount);
 
             if (response.success)
             {
@@ -31,6 +33,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             _toaster.AddErrorToastMessage("Çalışan listesi alınırken bir hata oluştu.");
             return View(new List<EmployeeModel>());
         }
+     
 
         public async Task<IActionResult> Details(int id)
         {

@@ -32,10 +32,10 @@ namespace StockTracker.MVC.Services.Concrete
             return result ?? ResponseViewModel<CreateEmployeeModel>.Fail("Bilinmeyen bir hata oluştu.", StatusCodes.Status500InternalServerError);
         }
 
-        public async Task<ResponseViewModel<IEnumerable<EmployeeModel>>> GetAllEmployeesAsync()
+        public async Task<ResponseViewModel<IEnumerable<EmployeeModel>>> GetAllEmployeesAsync(int count=11)
         {
             var client = GetHttpClient();
-            var response = await client.GetAsync("employee/allEmployees");
+            var response = await client.GetAsync($"employee/allEmployees?take={count}");
             var responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode || string.IsNullOrEmpty(responseBody))

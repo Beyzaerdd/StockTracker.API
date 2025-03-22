@@ -18,23 +18,23 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             _toaster = toaster;
         }
 
-        // GET: Admin/Customer
-        // GET: Admin/Customer
-        public async Task<IActionResult> Index()
+    
+        public async Task<IActionResult> Index(int? take)
         {
-            var response = await _customerService.GetAllCustomerAsync();
+            int customerCount = take ?? 11;
+            var response = await _customerService.GetAllCustomerAsync(customerCount);
 
             if (response.success)
             {
-                return View(response.Data); // Müşteri listesine ulaşınca view'a gönderiyoruz
+                return View(response.Data);
             }
 
             _toaster.AddErrorToastMessage("Müşteri listesi alınırken bir hata oluştu.");
-            return View(new List<CustomerModel>()); // Hata durumunda boş bir liste döndürüyoruz
+            return View(new List<CustomerModel>()); 
         }
 
 
-        // GET: Admin/Customer/Details/5
+  
         public async Task<IActionResult> Details(int id)
         {
             var response = await _customerService.GetCustomerByIdAsync(id);
@@ -48,13 +48,12 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             return View(response.Data);
         }
 
-        // GET: Admin/Customer/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Customer/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCustomerModel createCustomerModel)
@@ -77,8 +76,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             return View(createCustomerModel);
         }
 
-        // GET: Admin/Customer/Edit/5
-        // GET: Admin/Customer/Edit/5
+    
         public async Task<IActionResult> Edit(int id)
         {
             var response = await _customerService.GetCustomerByIdAsync(id);
@@ -89,7 +87,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Müşteri verilerini doldurarak UpdateCustomerModel'e atıyoruz
+        
             var updateCustomerModel = new UpdateCustomerModel
             {
                 Id = response.Data.Id,
@@ -100,10 +98,10 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
                 Address = response.Data.Address
             };
 
-            return View(updateCustomerModel); // Formu bu veri ile döndürüyoruz
+            return View(updateCustomerModel); 
         }
 
-        // POST: Admin/Customer/Edit/5
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UpdateCustomerModel updateCustomerModel)
@@ -126,7 +124,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
             return View(updateCustomerModel);
         }
 
-        // GET: Admin/Customer/Delete/5
+
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _customerService.GetCustomerByIdAsync(id);
@@ -137,10 +135,10 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(response.Data); // View'da müşteri bilgilerini göstermek için
+            return View(response.Data); 
         }
 
-        // POST: Admin/Customer/Delete/5
+  
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -156,7 +154,7 @@ namespace StockTracker.MVC.Areas.Admin.Controllers
                 _toaster.AddErrorToastMessage("Müşteri silinirken bir hata oluştu.");
             }
 
-            return RedirectToAction(nameof(Index)); // Başarıyla silindiğinde listeye geri yönlendir
+            return RedirectToAction(nameof(Index)); 
         }
 
     }
