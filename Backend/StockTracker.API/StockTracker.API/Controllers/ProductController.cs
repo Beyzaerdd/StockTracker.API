@@ -18,9 +18,9 @@ namespace StockTracker.API.Controllers
         }
 
         [HttpGet("allProducts")]
-        public async Task<IActionResult> GetAllProducts([FromQuery] int? take = null)
+        public async Task<IActionResult> GetAllProducts()
         {
-            var response = await _productService.GetAllProductsAsync(take);
+            var response = await _productService.GetAllProductsAsync();
             return CreateResponse(response);
         }
 

@@ -34,12 +34,13 @@ namespace StockTracker.API.Controllers
             return CreateResponse(response);
         }
 
-        [HttpPost("createReturnedProduct")]
-        public async Task<IActionResult> CreateReturnedProduct(CreateReturnedProductDTO createReturnedProductDTO)
+        [HttpPost("createReturnedProducts")]
+        public async Task<IActionResult> CreateReturnedProducts(IEnumerable<CreateReturnedProductDTO> createReturnedProductDTOs)
         {
-            var response = await _returnedProductService.CreateReturnedProductAsync(createReturnedProductDTO);
+            var response = await _returnedProductService.CreateReturnedProductsAsync(createReturnedProductDTOs);
             return CreateResponse(response);
         }
+
 
         [HttpPut("updateReturnedProduct")]
 
@@ -57,6 +58,14 @@ namespace StockTracker.API.Controllers
             return CreateResponse(response);
         }
 
+
+        [HttpGet("getReturnedProductsByRentalId/{rentalId}")]
+        public
+            async Task<IActionResult> GetReturnedProductsByRentalId(int rentalId)
+        {
+            var response = await _returnedProductService.GetReturnedProductsByRentalIdAsync(rentalId);
+            return CreateResponse(response);
+        }
 
 
 

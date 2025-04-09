@@ -31,7 +31,7 @@ namespace StockTracker.API.Controllers
             return CreateResponse(response);
         }
 
-        [HttpGet("net-profit")]
+        [HttpGet("netprofit")]
         public async Task<IActionResult> GetNetProfitAsync()
         {
             var response = await _transactionService.GetNetProfitAsync();
@@ -49,6 +49,34 @@ namespace StockTracker.API.Controllers
         public async Task<IActionResult> GetAllOutgoingTransaction([FromQuery] int? take = null)
         {
             var response = await _transactionService.GetAllOutgoingTransaction(take);
+            return CreateResponse(response);
+        }
+
+        [HttpGet("outgoing/{id}")]
+        public async Task<IActionResult> GetOutgoingTransactionsById(int id)
+        {
+            var response = await _transactionService.GetOutgoingTransactionsById(id);
+            return CreateResponse(response);
+        }
+
+        [HttpGet("incoming/{id}")]
+        public async Task<IActionResult> GetIncomingTransactionsById(int id)
+        {
+            var response = await _transactionService.GetIncomingTransactionsById(id);
+            return CreateResponse(response);
+        }
+
+        [HttpPut("incoming")]
+        public async Task<IActionResult> UpdateIncomingTransaction([FromBody] UpdateIncomingTransactionDTO updateIncomingTransactionDTO)
+        {
+            var response = await _transactionService.UpdateIncomingTransactionAsync(updateIncomingTransactionDTO);
+            return CreateResponse(response);
+        }
+
+        [HttpPut("outgoing")]
+        public async Task<IActionResult> UpdateOutgoingTransaction([FromBody] UpdateOutgoingTransactionDTO updateOutgoingTransactionDTO)
+        {
+            var response = await _transactionService.UpdateOutgoingTransactionAsync(updateOutgoingTransactionDTO);
             return CreateResponse(response);
         }
     }

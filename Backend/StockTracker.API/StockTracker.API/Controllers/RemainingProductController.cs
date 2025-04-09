@@ -33,7 +33,7 @@ namespace StockTracker.API.Controllers
             return CreateResponse(response);
         }
 
-        [HttpPut("processRemainingProducts/{rentalId}/{createNewRental}")]
+        [HttpPost("processRemainingProducts/{rentalId}/{createNewRental}")]
         public async Task<IActionResult> ProcessRemainingProducts(int rentalId, bool createNewRental)
         {
             var response = await _remainingProductService.ProcessRemainingProductsAsync(rentalId, createNewRental);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StockTracker.Business.Abstract;
 using StockTracker.Shared.DTOs.RentalDTOs;
+using StockTracker.Shared.DTOs.RentalItemDTOs;
 using StockTracker.Shared.Helpers;
 
 namespace StockTracker.API.Controllers
@@ -49,6 +50,27 @@ namespace StockTracker.API.Controllers
         public async Task<IActionResult> DeleteRental(int id)
         {
             var response = await _rentalService.DeleteRentalAsync(id);
+            return CreateResponse(response);
+        }
+
+        [HttpPut("updateRentalItem/{rentalId}/{rentalItemId}")]
+        public async Task<IActionResult> UpdateRentalItem([FromRoute] int rentalId, [FromRoute] int rentalItemId, [FromBody] UpdateRentalItemDTO updateRentalItemDTO)
+        {
+            var response = await _rentalService.UpdateRentalItemAsync(rentalId, rentalItemId, updateRentalItemDTO);
+            return CreateResponse(response);
+        }
+
+        [HttpDelete("deleteRentalItem/{rentalId}/{rentalItemId}")]
+        public async Task<IActionResult> DeleteRentalItem([FromRoute] int rentalId, [FromRoute] int rentalItemId)
+        {
+            var response = await _rentalService.DeleteRentalItemAsync(rentalId, rentalItemId);
+            return CreateResponse(response);
+        }
+
+        [HttpGet("getRentalByCustomerId/{customerId}")]
+        public async Task<IActionResult> GetRentalByCustomerId(int customerId)
+        {
+            var response = await _rentalService.GetRentalByCustomerId(customerId);
             return CreateResponse(response);
         }
 
