@@ -10,5 +10,6 @@ namespace StockTracker.Shared.DTOs.RemainingProductDTO
     {
         public int Id { get; set; }
         public int DaysRemaining { get; set; }
+        public int QuantityRemaining { get; set; }
     }
 }
