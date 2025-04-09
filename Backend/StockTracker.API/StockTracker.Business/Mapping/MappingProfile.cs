@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using StockTracker.Entity.Concrete;
-
+using StockTracker.Shared.DTOs;
 using StockTracker.Shared.DTOs.AccountTransactionDTOs;
 using StockTracker.Shared.DTOs.CustomerDTOs;
 using StockTracker.Shared.DTOs.CustomerPaymentDTOs;
@@ -41,10 +41,7 @@ namespace StockTracker.Business.Mapping
             CreateMap<UpdateProductDTO, Product>();
             CreateMap<ProductStockInfoDTO, Product>().ReverseMap();
 
-            // Rental Mapping
-            CreateMap<Rental, RentalDTO>()
-                .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
-                .ReverseMap();
+       
             CreateMap<CreateRentalDTO, Rental>();
             CreateMap<UpdateRentalDTO, Rental>();
 
@@ -52,6 +49,13 @@ namespace StockTracker.Business.Mapping
             CreateMap<RentalItem, RentalItemDTO>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ReverseMap();
+            CreateMap<Rental, RentalDTO>()
+           .ForMember(dest => dest.RentalItems, opt => opt.MapFrom(src => src.RentalItems))  // RentalItems'ı doğru eşliyoruz
+           .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name))
+           .ForMember(dest => dest.CustomerLastName, opt => opt.MapFrom(src => src.Customer.LastName))
+           .ReverseMap();
+
+    
             CreateMap<CreateRentalItemDTO, RentalItem>();
             CreateMap<UpdateRentalItemDTO, RentalItem>();
 
@@ -67,7 +71,7 @@ namespace StockTracker.Business.Mapping
            
             CreateMap<CustomerPayment, CustomerPaymentDTO>().ReverseMap();
 
-
+            CreateMap<AdminNotification, AdminNotificationDTO>().ReverseMap();
             // ReturnedProduct Mapping
             CreateMap<ReturnedProduct, ReturnedProductDTO>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.RentalItem.Product.Name))
