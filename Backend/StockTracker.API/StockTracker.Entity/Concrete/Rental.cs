@@ -18,6 +18,8 @@ namespace StockTracker.Entity.Concrete
         public ICollection<RentalItem> RentalItems { get; set; }
         public decimal? VATRate { get; set; }
 
+        public decimal? Shipping { get; set; }
+
 
     }
 }

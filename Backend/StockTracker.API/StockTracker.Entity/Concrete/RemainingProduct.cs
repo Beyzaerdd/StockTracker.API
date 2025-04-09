@@ -15,5 +15,7 @@ namespace StockTracker.Entity.Concrete
         public int DaysRemaining { get; set; }   // 30 gün kontrolü için
         public decimal DailyPrice { get; set; }
         public decimal TotalPrice { get; set; }
+
+        public int QuantityRemaining { get; set; }
     }
 }

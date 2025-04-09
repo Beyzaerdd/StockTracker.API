@@ -26,5 +26,9 @@ namespace StockTracker.Entity.Concrete
         public decimal RemainingAmount => TotalAmount - PaidAmount; 
 
         public string Description { get; set; }
+        public int RentalId { get; set; }
+
+        [ForeignKey("RentalId")]
+        public Rental Rental { get; set; }
     }
 }
